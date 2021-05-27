@@ -4,6 +4,9 @@ import com.todouno.product.model.Product;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * ProductService.
+ */
 public interface ProductService {
 
   public Mono<Product> findById(String id);

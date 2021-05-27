@@ -1,7 +1,7 @@
 package com.todouno.product.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import javax.validation.constraints.NotBlank;
 
+/**
+ * Product.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,11 +26,11 @@ public class Product {
 
   private String name;
 
-  @NotBlank(message = "'numDoc' is required")
-  private int stock;
+  @NotNull(message = "'stock' is required")
+  private Integer stock;
 
-  @NotBlank(message = "'numDoc' is required")
-  private float price;
+  @NotNull(message = "'price' is required")
+  private Float price;
 
   private Date creationDate;
 

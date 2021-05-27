@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * ProductController.
+ */
 @Api(tags = "Product API", value = "CRUD operations for products")
 @RestController
 @RequestMapping("/product")
@@ -30,7 +33,7 @@ public class ProductController {
   private ProductService productService;
 
   /**
-   * Controlador de clientms.
+   * Controlador de product.
    */
   @GetMapping("/test")
   public Mono<Product> saludo() {
@@ -39,77 +42,59 @@ public class ProductController {
     return Mono.justOrEmpty(hola);
   }
 
-//  @ApiOperation(value = "Service used to return all clients")
-//  @GetMapping("/findAll")
-//  public Flux<Client> findAll() {
-//    return productService.findAll();
-//  }
-//
-//  @ApiOperation(value = "Service used to find a client by id")
-//  @GetMapping("/findById/{id}")
-//  public Mono<Client> findById(@PathVariable("id") String id) {
-//    return productService.findById(id);
-//  }
-//
-//  @ApiOperation(value = "Service used to find a client by numDoc")
-//  @GetMapping("/find/{numDoc}")
-//  public Mono<Client> findByNumDoc(@PathVariable("numDoc") String numDoc) {
-//    return productService.findByNumDoc(numDoc);
-//  }
-//
-//  @ApiOperation(value = "Service used to get the client type by a client numDoc")
-//  @GetMapping("/getClientType/{numDoc}")
-//  public Mono<String> getClTypeByNumDoc(@PathVariable("numDoc") String numDoc) {
-//    return productService.getClientTypeByNumDoc(numDoc);
-//  }
-//
-//  @ApiOperation(value = "Service used to find if a client exist by numDoc")
-//  @GetMapping("/exist/{numDoc}")
-//  public Mono<Boolean> exist(@PathVariable("numDoc") String numDoc) {
-//    return productService.existsByNumDoc(numDoc);
-//  }
-//
-//  /**
-//   * GUARDAR UN CLIENTE.
-//   */
-//  @ApiOperation(value = "Service used to create clients")
-//  @PostMapping("/save")
-//  public Mono<ResponseEntity<Client>> create(@Valid @RequestBody Client cl) {
-//    return productService.save(cl)
-//        .map(c -> ResponseEntity
-//            .created(URI.create("/clients".concat(c.getId())))
-//            .contentType(MediaType.APPLICATION_JSON)
-//            .body(c));
-//  }
-//
-//  /**
-//   * ACTUALIZAR UN CLIENTE.
-//   */
-//  @ApiOperation(value = "Service used to update a client")
-//  @PutMapping("/update/{id}")
-//  public Mono<ResponseEntity<Client>> update(@PathVariable("id") String id,
-//      @RequestBody Client cl) {
-//    return productService.update(cl, id)
-//        .map(c -> ResponseEntity
-//            .created(URI.create("/clients".concat(c.getId())))
-//            .contentType(MediaType.APPLICATION_JSON)
-//            .body(c))
-//        .defaultIfEmpty(ResponseEntity.notFound().build());
-//  }
-//
-//  /**
-//   * ELIMINAR UN CLIENTE.
-//   */
-//  @ApiOperation(value = "Service used to delete a client")
-//  @DeleteMapping("/delete/{id}")
-//  public Mono<ResponseEntity<Void>> delete(@PathVariable String id) {
-//    return productService.delete(id).map(res -> ResponseEntity
-//        .ok()
-//        .<Void>build())
-//        .defaultIfEmpty(ResponseEntity
-//            .notFound()
-//            .build()
-//        );
-//
-//  }
+  @ApiOperation(value = "Service used to return all products")
+  @GetMapping("/findAll")
+  public Flux<Product> findAll() {
+    return productService.findAll();
+  }
+
+  @ApiOperation(value = "Service used to find a product by id")
+  @GetMapping("/findById/{id}")
+  public Mono<Product> findById(@PathVariable("id") String id) {
+    return productService.findById(id);
+  }
+
+  /**
+   * GUARDAR UN PRODUCTO.
+   */
+  @ApiOperation(value = "Service used to create products")
+  @PostMapping("/save")
+  public Mono<ResponseEntity<Product>> create(@Valid @RequestBody Product product) {
+    return productService.save(product)
+        .map(c -> ResponseEntity
+            .created(URI.create("/products".concat(c.getId())))
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(c));
+  }
+
+  /**
+   * ACTUALIZAR UN PRODUCTO.
+   */
+  @ApiOperation(value = "Service used to update a product")
+  @PutMapping("/update/{id}")
+  public Mono<ResponseEntity<Product>> update(@PathVariable("id") String id,
+      @Valid @RequestBody Product product) {
+    return productService.update(product, id)
+        .map(c -> ResponseEntity
+            .created(URI.create("/products".concat(c.getId())))
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(c))
+        .defaultIfEmpty(ResponseEntity.notFound().build());
+  }
+
+  /**
+   * ELIMINAR UN PRODUCTO.
+   */
+  @ApiOperation(value = "Service used to delete a product")
+  @DeleteMapping("/delete/{id}")
+  public Mono<ResponseEntity<Void>> delete(@PathVariable String id) {
+    return productService.delete(id).map(res -> ResponseEntity
+        .ok()
+        .<Void>build())
+        .defaultIfEmpty(ResponseEntity
+            .notFound()
+            .build()
+        );
+
+  }
 }
