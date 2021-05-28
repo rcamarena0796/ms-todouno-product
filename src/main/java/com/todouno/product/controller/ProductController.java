@@ -32,26 +32,26 @@ public class ProductController {
   @Autowired
   private ProductService productService;
 
-  /**
-   * PRODUCT CONTROLLER.
-   */
-  @GetMapping("/test")
-  public Mono<Product> saludo() {
-    Product hola = new Product();
-    hola.setName("Ruben");
-    return Mono.justOrEmpty(hola);
-  }
-
   @ApiOperation(value = "Service used to return all products")
   @GetMapping("/findAll")
   public Flux<Product> findAll() {
     return productService.findAll();
   }
 
+  /**
+   * FIND A PRODUCT.
+   */
   @ApiOperation(value = "Service used to find a product by id")
   @GetMapping("/find/{id}")
-  public Mono<Product> findById(@PathVariable("id") String id) {
-    return productService.findById(id);
+  public Mono<ResponseEntity<Product>> findById(@PathVariable("id") String id) {
+    return productService.findById(id).map(c -> ResponseEntity
+        .ok()
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(c))
+        .defaultIfEmpty(ResponseEntity
+            .notFound()
+            .build()
+        );
   }
 
   /**

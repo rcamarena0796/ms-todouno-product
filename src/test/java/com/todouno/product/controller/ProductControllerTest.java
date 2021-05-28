@@ -80,6 +80,19 @@ public class ProductControllerTest {
   }
 
   @Test
+  void getById_whenNotExists_returnNotFound() {
+    String id = "-1";
+    when(service.findById(id))
+        .thenReturn(Mono.empty());
+
+    webClient.get()
+        .uri("/product/find/{numId}", id)
+        .exchange()
+        .expectStatus()
+        .isNotFound();
+  }
+
+  @Test
   void saveProduct() {
     when(service.save(expectedProduct)).thenReturn(Mono.just(expectedProduct));
 
@@ -90,6 +103,18 @@ public class ProductControllerTest {
         .isCreated()
         .expectBody(Product.class)
         .isEqualTo(expectedProduct);
+  }
+
+
+  @Test
+  void saveFail() {
+    when(service.save(expectedProduct)).thenReturn(Mono.error(new Exception()));
+
+    webClient.post()
+        .uri("/product/save").body(Mono.just(expectedProduct), Product.class)
+        .exchange()
+        .expectStatus()
+        .isEqualTo(500);
   }
 
   @Test

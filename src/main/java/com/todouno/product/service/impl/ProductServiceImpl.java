@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public Mono<Product> findById(String id) {
-    return productRepository.findById(id);
+    return productRepository.findById(id).switchIfEmpty(Mono.empty());
   }
 
   @Override
