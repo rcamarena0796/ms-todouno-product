@@ -49,7 +49,7 @@ public class ProductController {
   }
 
   @ApiOperation(value = "Service used to find a product by id")
-  @GetMapping("/findById/{id}")
+  @GetMapping("/find/{id}")
   public Mono<Product> findById(@PathVariable("id") String id) {
     return productService.findById(id);
   }

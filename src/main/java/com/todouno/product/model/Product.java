@@ -30,7 +30,7 @@ public class Product {
   private Integer stock;
 
   @NotNull(message = "'price' is required")
-  private Float price;
+  private Double price;
 
   private Date creationDate;
 
