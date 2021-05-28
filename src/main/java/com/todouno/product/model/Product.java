@@ -26,10 +26,10 @@ public class Product {
 
   private String name;
 
-  @NotNull(message = "'stock' is required")
+  @NotNull(message = "stock is required")
   private Integer stock;
 
-  @NotNull(message = "'price' is required")
+  @NotNull(message = "price is required")
   private Double price;
 
   private Date creationDate;

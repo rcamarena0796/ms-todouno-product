@@ -33,7 +33,7 @@ public class ProductController {
   private ProductService productService;
 
   /**
-   * Controlador de product.
+   * PRODUCT CONTROLLER.
    */
   @GetMapping("/test")
   public Mono<Product> saludo() {
@@ -55,7 +55,7 @@ public class ProductController {
   }
 
   /**
-   * GUARDAR UN PRODUCTO.
+   * SAVE A PRODUCT.
    */
   @ApiOperation(value = "Service used to create products")
   @PostMapping("/save")
@@ -68,7 +68,7 @@ public class ProductController {
   }
 
   /**
-   * ACTUALIZAR UN PRODUCTO.
+   * UPDATE A PRODUCT.
    */
   @ApiOperation(value = "Service used to update a product")
   @PutMapping("/update/{id}")
@@ -83,7 +83,7 @@ public class ProductController {
   }
 
   /**
-   * ELIMINAR UN PRODUCTO.
+   * DELETE A PRODUCT.
    */
   @ApiOperation(value = "Service used to delete a product")
   @DeleteMapping("/delete/{id}")
