@@ -47,9 +47,6 @@ public class ProductControllerTest {
   @MockBean
   protected ProductService service;
 
-  @MockBean
-  ProductRepository repository;
-
   @Autowired
   private WebTestClient webClient;
 
